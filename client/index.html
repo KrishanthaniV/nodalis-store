@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nodalis — Handmade Fashion</title>
+  <meta name="description" content="Nodalis is a boutique handmade fashion label — crocheted tops, hand-painted tees, bags & accessories. Limited edition, artisan-crafted pieces.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+      <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/client/shop.html">Shop</a>
+        <a href="/client/about.html">About</a>
+        <a href="/client/contact.html">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <a href="/client/login.html" class="nav-icon" title="Account">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="/client/cart.html" class="nav-icon" title="Cart" id="cartIcon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div class="nav-toggle" id="navToggle">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="nav-mobile" id="navMobile">
+      <a href="/">Home</a>
+      <a href="/client/shop.html">Shop</a>
+      <a href="/client/about.html">About</a>
+      <a href="/client/contact.html">Contact</a>
+      <a href="/client/login.html">Account</a>
+      <a href="/client/cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tagline fade-in">~ handmade with intention ~</p>
+      <h1 class="fade-in fade-in-delay-1">Where Craft Meets <em>Fashion</em></h1>
+      <p class="hero-desc fade-in fade-in-delay-2">
+        Unique crocheted pieces, hand-painted tees & artisan accessories. 
+        Every piece is made by hand — limited runs, endless character.
+      </p>
+      <div class="hero-buttons fade-in fade-in-delay-3">
+        <a href="/client/shop.html" class="btn btn-primary btn-lg">Shop Collection</a>
+        <a href="/client/about.html" class="btn btn-secondary btn-lg">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="text-accent">Explore</p>
+        <h2>Shop by Category</h2>
+        <p>Find your next favorite handmade piece</p>
+      </div>
+      <div class="categories-grid">
+        <a href="/client/shop.html?category=crochet-tops" class="category-card fade-in fade-in-delay-1">
+          <div class="category-card-bg cat-crochet"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3>Crochet Tops</h3>
+            <p>Handmade knitwear</p>
+          </div>
+        </a>
+        <a href="/client/shop.html?category=bags" class="category-card fade-in fade-in-delay-2">
+          <div class="category-card-bg cat-bags"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3>Crochet Bags</h3>
+            <p>Artisan carryalls</p>
+          </div>
+        </a>
+        <a href="/client/shop.html?category=accessories" class="category-card fade-in fade-in-delay-3">
+          <div class="category-card-bg cat-accessories"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3>Accessories</h3>
+            <p>Handcrafted details</p>
+          </div>
+        </a>
+        <a href="/client/shop.html?category=hand-painted-tees" class="category-card fade-in fade-in-delay-4">
+          <div class="category-card-bg cat-tees"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3>Hand-Painted Tees</h3>
+            <p>One-of-a-kind art</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED PRODUCTS ============ -->
+  <section class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="text-accent">New Arrivals</p>
+        <h2>Featured Pieces</h2>
+        <p>Each piece is handcrafted and limited in quantity</p>
+      </div>
+      <div class="products-grid" id="featuredProducts">
+        <!-- Products loaded via JS -->
+      </div>
+      <div style="text-align: center; margin-top: var(--space-2xl);">
+        <a href="/client/shop.html" class="btn btn-secondary">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HANDMADE HIGHLIGHT ============ -->
+  <section class="section">
+    <div class="highlight-section fade-in">
+      <p class="text-accent">~ Limited & Handmade ~</p>
+      <h2 style="margin-bottom: var(--space-md);">Every Stitch Tells a Story</h2>
+      <p style="margin-bottom: var(--space-xl);">
+        Our pieces are crafted by hand in small batches. When they're gone, they're gone. 
+        No mass production, no shortcuts — just genuine artisan craft.
+      </p>
+      <a href="/client/shop.html" class="btn btn-sage btn-lg">Shop Limited Pieces</a>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT PREVIEW ============ -->
+  <section class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="about-preview">
+        <div class="about-preview-image fade-in">Nodalis Craft</div>
+        <div class="about-preview-content fade-in fade-in-delay-1">
+          <p class="text-accent">Our Story</p>
+          <h2>Made by Hand, Worn with Heart</h2>
+          <p>
+            Nodalis was born from a love for handmade craft and the belief that clothing should be 
+            personal, intentional, and made with care. Every crochet stitch, every brush stroke on 
+            our hand-painted tees is placed with purpose.
+          </p>
+          <p>
+            We're a small team of makers who believe slow fashion is beautiful fashion.
+          </p>
+          <a href="/client/about.html" class="btn btn-secondary" style="margin-top: var(--space-sm);">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INSTAGRAM ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="text-accent">@nodalis</p>
+        <h2>Follow the Thread</h2>
+        <p>See our latest creations on Instagram</p>
+      </div>
+      <div class="insta-grid fade-in">
+        <div class="insta-item" style="background: var(--sage-light);"></div>
+        <div class="insta-item" style="background: var(--beige);"></div>
+        <div class="insta-item" style="background: var(--beige-dark);"></div>
+        <div class="insta-item" style="background: var(--sage);"></div>
+        <div class="insta-item" style="background: var(--warm-brown); opacity:0.6;"></div>
+        <div class="insta-item" style="background: var(--sage-light);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="section-sm">
+    <div class="newsletter fade-in">
+      <h2>Stay in the Loop</h2>
+      <p>Be the first to know about new drops, restocks & behind-the-scenes moments.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+          <p>Handmade fashion for the intentional wardrobe. Crafted with care, worn with soul.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/client/shop.html?category=crochet-tops">Crochet Tops</a></li>
+            <li><a href="/client/shop.html?category=bags">Bags</a></li>
+            <li><a href="/client/shop.html?category=accessories">Accessories</a></li>
+            <li><a href="/client/shop.html?category=hand-painted-tees">Hand-Painted Tees</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/client/about.html">About Us</a></li>
+            <li><a href="/client/contact.html">Contact</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="mailto:hello@nodalis.com">hello@nodalis.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nodalis. All rights reserved.</p>
+        <p>Handmade with ♥</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>

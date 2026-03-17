@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Nodalis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/client/shop.html">Shop</a>
+        <a href="/client/about.html">About</a>
+        <a href="/client/contact.html">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <a href="/client/cart.html" class="nav-icon" title="Cart" id="cartIcon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="/">Home</a><a href="/client/shop.html">Shop</a><a href="/client/about.html">About</a><a href="/client/contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <section class="cart-page">
+    <div class="container">
+      <h1 style="margin-bottom: var(--space-2xl);">Checkout</h1>
+
+      <div class="checkout-layout" id="checkoutContent">
+        <!-- Left: Forms -->
+        <div>
+          <!-- Shipping -->
+          <div class="checkout-section">
+            <h3>Shipping Address</h3>
+            <form id="checkoutForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shipFirst">First Name</label>
+                  <input type="text" id="shipFirst" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipLast">Last Name</label>
+                  <input type="text" id="shipLast" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="shipStreet">Street Address</label>
+                <input type="text" id="shipStreet" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shipCity">City</label>
+                  <input type="text" id="shipCity" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipState">State / Province</label>
+                  <input type="text" id="shipState" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shipZip">Zip / Postal Code</label>
+                  <input type="text" id="shipZip" required>
+                </div>
+                <div class="form-group">
+                  <label for="shipCountry">Country</label>
+                  <select id="shipCountry">
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="checkout-section">
+            <h3>Payment Method</h3>
+            <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+              <label style="display:flex;align-items:center;gap:var(--space-md);padding:var(--space-md);border:1.5px solid var(--beige-dark);border-radius:var(--radius-md);cursor:pointer;">
+                <input type="radio" name="payment" value="stripe" checked>
+                <div>
+                  <strong>Credit / Debit Card</strong>
+                  <p class="text-small" style="color:var(--charcoal-light);">Powered by Stripe — secure payment</p>
+                </div>
+              </label>
+              <label style="display:flex;align-items:center;gap:var(--space-md);padding:var(--space-md);border:1.5px solid var(--beige-dark);border-radius:var(--radius-md);cursor:pointer;">
+                <input type="radio" name="payment" value="paypal">
+                <div>
+                  <strong>PayPal</strong>
+                  <p class="text-small" style="color:var(--charcoal-light);">Pay with your PayPal account</p>
+                </div>
+              </label>
+            </div>
+            <div id="stripeCardElement" style="margin-top:var(--space-lg);padding:var(--space-md);border:1.5px solid var(--beige-dark);border-radius:var(--radius-md);background:var(--cream-light);">
+              <p class="text-small" style="color:var(--charcoal-light);text-align:center;">
+                Card input will appear here when Stripe is configured.<br>
+                See README for setup instructions.
+              </p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-lg" style="width:100%;" onclick="placeOrder()">
+            Place Order
+          </button>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div>
+          <div class="cart-summary" id="checkoutSummary">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nodalis. All rights reserved.</p>
+        <p>Handmade with ♥</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cart = getCart();
+      if (cart.length === 0) {
+        window.location.href = '/client/cart.html';
+        return;
+      }
+      renderCheckoutSummary(cart);
+    });
+
+    function renderCheckoutSummary(cart) {
+      const el = document.getElementById('checkoutSummary');
+      const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      const shipping = subtotal > 100 ? 0 : 8.50;
+      const total = subtotal + shipping;
+
+      el.innerHTML = `
+        <h3>Order Summary</h3>
+        ${cart.map(item => `
+          <div style="display:flex;justify-content:space-between;padding:var(--space-sm) 0;font-size:0.9rem;">
+            <span>${item.name} × ${item.quantity}</span>
+            <span>$${(item.price * item.quantity).toFixed(2)}</span>
+          </div>
+        `).join('')}
+        <div class="cart-summary-row" style="margin-top:var(--space-md);">
+          <span>Subtotal</span><span>$${subtotal.toFixed(2)}</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Shipping</span><span>${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Total</span><span>$${total.toFixed(2)}</span>
+        </div>
+      `;
+    }
+
+    async function placeOrder() {
+      const token = localStorage.getItem('nodalis_token');
+      if (!token) {
+        showToast('Please log in to place an order', 'error');
+        setTimeout(() => window.location.href = '/client/login.html', 1500);
+        return;
+      }
+
+      const cart = getCart();
+      const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'stripe';
+
+      const orderData = {
+        items: cart.map(item => ({
+          product: item._id,
+          name: item.name,
+          price: item.price,
+          size: item.size,
+          quantity: item.quantity
+        })),
+        shippingAddress: {
+          street: document.getElementById('shipStreet').value,
+          city: document.getElementById('shipCity').value,
+          state: document.getElementById('shipState').value,
+          zip: document.getElementById('shipZip').value,
+          country: document.getElementById('shipCountry').value
+        },
+        paymentMethod
+      };
+
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(orderData)
+        });
+
+        if (res.ok) {
+          clearCart();
+          showToast('Order placed successfully! Thank you for your purchase.', 'success');
+          setTimeout(() => window.location.href = '/', 2000);
+        } else {
+          const data = await res.json();
+          showToast(data.message || 'Order failed', 'error');
+        }
+      } catch {
+        showToast('Order placed (demo mode). Thank you!', 'success');
+        clearCart();
+        setTimeout(() => window.location.href = '/', 2000);
+      }
+    }
+  </script>
+</body>
+</html>

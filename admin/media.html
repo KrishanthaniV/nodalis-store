@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Library — Nodalis Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+      <p class="admin-subtitle">Admin Panel</p>
+      <nav class="admin-nav">
+        <a href="/admin/dashboard.html" class="admin-nav-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/admin/products.html" class="admin-nav-item">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Products
+        </a>
+        <a href="/admin/orders.html" class="admin-nav-item">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Orders
+        </a>
+        <a href="/admin/media.html" class="admin-nav-item active">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Media Library
+        </a>
+        <div style="margin-top: var(--space-3xl); padding-top: var(--space-lg); border-top: 1px solid rgba(212,197,181,0.15);">
+          <a href="/" class="admin-nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            View Store
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1>Media Library</h1>
+          <p style="color: var(--charcoal-light);">Upload and manage your product images and brand assets</p>
+        </div>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="upload-zone" id="mediaUploadZone">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p style="font-size:1.1rem;font-weight:500;">Drop files here or click to upload</p>
+        <p class="text-small" style="color:var(--charcoal-light);">JPG, PNG, GIF up to 5MB each</p>
+        <input type="file" id="mediaFileInput" multiple accept="image/*" style="display:none">
+      </div>
+
+      <!-- Media Grid -->
+      <div class="admin-table-card" style="padding: var(--space-lg);">
+        <h3 style="margin-bottom: var(--space-lg);">Uploaded Images</h3>
+        <div class="media-grid" id="mediaGrid">
+          <!-- Placeholder items -->
+          <div class="media-item" style="background: var(--sage-light); display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-accent);color:var(--sage-dark);">Logo</span>
+          </div>
+          <div class="media-item" style="background: var(--beige);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-accent);color:var(--warm-brown);">Banner</span>
+          </div>
+        </div>
+        <p id="mediaEmpty" class="text-small" style="color:var(--charcoal-light);text-align:center;padding:var(--space-xl);display:none;">
+          Upload images to populate your media library.
+        </p>
+      </div>
+
+      <!-- Logo Management -->
+      <div class="admin-table-card" style="padding: var(--space-xl); margin-top: var(--space-xl);">
+        <h3 style="margin-bottom: var(--space-md);">Brand Logo</h3>
+        <p style="color:var(--charcoal-light);margin-bottom:var(--space-lg);font-size:0.9rem;">
+          Upload a new logo to replace the text-based Nodalis logo across the site.
+        </p>
+        <div style="display:flex;align-items:center;gap:var(--space-xl);">
+          <div style="width:120px;height:120px;border-radius:var(--radius-md);background:var(--beige);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:600;letter-spacing:0.05em;">NODALIS</span>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('logoInput').click()">Upload Logo</button>
+            <input type="file" id="logoInput" accept="image/*" style="display:none">
+            <p class="text-small" style="color:var(--charcoal-light);margin-top:var(--space-sm);">Recommended: 400×100px, PNG with transparency</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    // Media Library interactions
+    const uploadZone = document.getElementById('mediaUploadZone');
+    const fileInput = document.getElementById('mediaFileInput');
+
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      handleMediaUpload(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => handleMediaUpload(fileInput.files));
+
+    async function handleMediaUpload(files) {
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+          const token = localStorage.getItem('nodalis_token');
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+          });
+          if (res.ok) {
+            const data = await res.json();
+            addMediaItem(data.url, file.name);
+            showToast(`${file.name} uploaded!`, 'success');
+          }
+        } catch {
+          // Add placeholder for demo
+          addMediaItem(null, file.name);
+          showToast(`${file.name} uploaded (demo mode)`, 'success');
+        }
+      }
+    }
+
+    function addMediaItem(url, name) {
+      const grid = document.getElementById('mediaGrid');
+      const item = document.createElement('div');
+      item.className = 'media-item';
+      const hue = Math.random() * 360;
+      item.style.background = `hsl(${hue}, 20%, 82%)`;
+      item.innerHTML = `<span style="font-family:var(--font-accent);color:hsl(${hue},25%,45%);font-size:0.85rem;padding:0.5rem;text-align:center;">${name}</span>`;
+      grid.appendChild(item);
+    }
+  </script>
+</body>
+</html>

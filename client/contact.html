@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Nodalis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/client/shop.html">Shop</a>
+        <a href="/client/about.html">About</a>
+        <a href="/client/contact.html" class="active">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <a href="/client/login.html" class="nav-icon" title="Account">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a href="/client/cart.html" class="nav-icon" title="Cart" id="cartIcon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="/">Home</a><a href="/client/shop.html">Shop</a><a href="/client/about.html">About</a><a href="/client/contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <p class="text-accent fade-in">Get in Touch</p>
+      <h1 class="fade-in fade-in-delay-1">We'd Love to Hear from You</h1>
+      <p class="fade-in fade-in-delay-2" style="margin: var(--space-md) auto 0; max-width: 50ch;">
+        Questions about an order, custom requests, or just want to say hello? Drop us a line.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Info -->
+        <div class="contact-info-card fade-in">
+          <h3 style="margin-bottom: var(--space-xl);">Contact Info</h3>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:hello@nodalis.com" style="color: var(--sage-dark);">hello@nodalis.com</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div>
+              <h4>Instagram</h4>
+              <p><a href="#" style="color: var(--sage-dark);">@nodalis</a></p>
+            </div>
+          </div>
+          <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--beige);">
+            <p class="text-accent" style="font-size:1.2rem; margin-bottom: var(--space-sm);">"Every piece is a conversation between maker and wearer."</p>
+            <p class="text-small">— The Nodalis Team</p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form fade-in fade-in-delay-1">
+          <h3 style="margin-bottom: var(--space-xl);">Send a Message</h3>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" id="contactName" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" placeholder="your@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contactSubject">Subject</label>
+              <select id="contactSubject">
+                <option>General Inquiry</option>
+                <option>Order Question</option>
+                <option>Custom Request</option>
+                <option>Wholesale</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" placeholder="Tell us what's on your mind..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nodalis. All rights reserved.</p>
+        <p>Handmade with ♥</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/cart.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('contactName').value,
+        email: document.getElementById('contactEmail').value,
+        subject: document.getElementById('contactSubject').value,
+        message: document.getElementById('contactMessage').value
+      };
+      try {
+        await fetch('/api/contact', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      } catch {}
+      showToast('Message sent! We\'ll get back to you soon.', 'success');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
