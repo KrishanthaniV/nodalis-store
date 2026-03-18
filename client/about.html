@@ -1,124 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Nodalis</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="nav" id="mainNav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/client/shop.html">Shop</a>
-        <a href="/client/about.html" class="active">About</a>
-        <a href="/client/contact.html">Contact</a>
-      </div>
-      <div class="nav-icons">
-        <a href="/client/login.html" class="nav-icon" title="Account">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
-        <a href="/client/cart.html" class="nav-icon" title="Cart" id="cartIcon">
-          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="cart-count" id="cartCount">0</span>
-        </a>
-        <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
-      </div>
-    </div>
-    <div class="nav-mobile" id="navMobile">
-      <a href="/">Home</a><a href="/client/shop.html">Shop</a><a href="/client/about.html">About</a><a href="/client/contact.html">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="about-hero">
-    <div class="container">
-      <p class="text-accent fade-in">Our Story</p>
-      <h1 class="fade-in fade-in-delay-1">The Heart Behind Nodalis</h1>
-      <p class="fade-in fade-in-delay-2" style="margin: var(--space-md) auto 0; max-width: 55ch;">
-        We believe fashion should be personal, intentional, and made with care — one stitch, one brushstroke at a time.
-      </p>
-    </div>
-  </section>
-
-  <!-- About Content -->
-  <section class="section">
-    <div class="about-content">
-      <div class="about-block fade-in">
-        <h2>Born from a Love for Craft</h2>
-        <p>Nodalis started as a passion project — a small collection of crocheted pieces made in a tiny studio, shared with friends who loved them. What began as a handful of handmade tops quickly grew into a full label dedicated to artisan-crafted fashion.</p>
-        <p>Every piece in our collection carries the maker's touch. We don't use machines. We don't mass-produce. Each crochet stitch is placed by hand, each brushstroke on our hand-painted tees is unique and unrepeatable.</p>
-      </div>
-
-      <div class="about-block fade-in">
-        <h2>The Art of Crochet</h2>
-        <p>Crochet is one of the oldest textile arts, and at Nodalis, we honor that tradition while pushing it into contemporary fashion. Our crocheted tops and bags blend classic techniques with modern silhouettes — think heritage craft meets streetwear edge.</p>
-        <p>We source high-quality yarns and spend hours perfecting each pattern before a single piece goes into production. The result: garments that feel as good as they look, with a texture and warmth that no machine can replicate.</p>
-      </div>
-
-      <div class="about-block fade-in">
-        <h2>Hand-Painted, One of a Kind</h2>
-        <p>Our hand-painted tees are where fashion meets fine art. Each piece is painted directly onto premium 300 GSM heavyweight cotton using textile-safe paints that won't crack or fade. Because every tee is painted freehand, no two are ever alike.</p>
-        <p>We draw inspiration from nature, abstract expressionism, and street culture. When you wear a Nodalis hand-painted tee, you're wearing a piece of wearable art that exists nowhere else in the world.</p>
-      </div>
-
-      <div class="about-block fade-in">
-        <h2>Slow Fashion, Always</h2>
-        <p>In a world of fast fashion and disposable trends, Nodalis stands for something different. We produce in small batches because quality takes time. We'd rather make 20 perfect pieces than 2,000 forgettable ones.</p>
-        <p>Slow fashion isn't just a label for us — it's how we operate. We believe that when you invest in a piece that's made with intention, you wear it differently. You care for it. It becomes part of your story.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Values -->
-  <section class="section" style="background: var(--white);">
-    <div class="container">
-      <div class="section-header fade-in">
-        <h2>What We Stand For</h2>
-      </div>
-      <div class="about-values">
-        <div class="about-value fade-in fade-in-delay-1">
-          <div class="about-value-icon">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <h4>Made with Love</h4>
-          <p class="text-small" style="color:var(--charcoal-light);">Every piece carries the maker's intention. Handmade means heartfelt.</p>
-        </div>
-        <div class="about-value fade-in fade-in-delay-2">
-          <div class="about-value-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h4>Slow & Intentional</h4>
-          <p class="text-small" style="color:var(--charcoal-light);">Small batches, no rush. Quality over quantity, always.</p>
-        </div>
-        <div class="about-value fade-in fade-in-delay-3">
-          <div class="about-value-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h4>One of a Kind</h4>
-          <p class="text-small" style="color:var(--charcoal-light);">Limited runs and hand-painted pieces that can never be duplicated.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2026 Nodalis. All rights reserved.</p>
-        <p>Handmade with ♥</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="/js/script.js"></script>
-  <script src="/js/cart.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>About — Nodalis</title><link rel="stylesheet" href="/css/luxury.css"></head><body><nav class="nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis"></a>
+  <div class="nav-links">
+    <a href="/">Home</a><a href="/client/shop.html">Shop</a><a href="/client/about.html">About</a><a href="/client/contact.html">Contact</a>
+  </div>
+  <div class="nav-icons">
+    <a href="/client/login.html" class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a href="/client/cart.html" class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-badge" id="cartCount">0</span></a>
+    <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/">Home</a><a href="/client/shop.html">Shop</a><a href="/client/about.html">About</a><a href="/client/contact.html">Contact</a><a href="/client/login.html">Account</a><a href="/client/cart.html">Cart</a>
+</div>
+<section class="page-header section"><p class="section-eyebrow">Our Story</p><h1 class="section-title">The Heart Behind Nodalis</h1><p class="section-desc" style="margin:0 auto;">Fashion should be personal, intentional, and made with care.</p></section>
+<section class="section"><div style="max-width:780px;margin:0 auto;">
+<div class="reveal" style="margin-bottom:3rem;"><h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;">Born from a Love for Craft</h2><p style="color:var(--grey);line-height:1.9;margin-bottom:1rem;">Nodalis started as a passion project — a small collection of crocheted pieces made in a tiny studio. What began as a handful of handmade tops quickly grew into a full label dedicated to artisan-crafted fashion.</p><p style="color:var(--grey);line-height:1.9;">Every piece carries the maker's touch. We don't use machines. We don't mass-produce. Each crochet stitch is placed by hand, each brushstroke on our hand-painted tees is unique and unrepeatable.</p></div>
+<div class="reveal" style="margin-bottom:3rem;"><h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;">The Art of Crochet</h2><p style="color:var(--grey);line-height:1.9;margin-bottom:1rem;">Crochet is one of the oldest textile arts, and at Nodalis, we honor that tradition while pushing it into contemporary fashion. Our crocheted tops and bags blend classic techniques with modern silhouettes.</p><p style="color:var(--grey);line-height:1.9;">We source high-quality yarns and spend hours perfecting each pattern. The result: garments with a texture and warmth that no machine can replicate.</p></div>
+<div class="reveal" style="margin-bottom:3rem;"><h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;">Slow Fashion, Always</h2><p style="color:var(--grey);line-height:1.9;">In a world of fast fashion and disposable trends, Nodalis stands for something different. We produce in small batches because quality takes time. We'd rather make 20 perfect pieces than 2,000 forgettable ones.</p></div>
+</div></section>
+<footer class="footer">
+  <div class="footer-grid">
+    <div><a href="/" class="footer-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis"></a><p class="footer-desc">Handmade fashion for the intentional wardrobe. Crafted with care, worn with soul.</p></div>
+    <div><h4>Shop</h4><ul><li><a href="/client/shop.html?category=crochet-tops">Crochet Tops</a></li><li><a href="/client/shop.html?category=bags">Bags</a></li><li><a href="/client/shop.html?category=accessories">Accessories</a></li><li><a href="/client/shop.html?category=hand-painted-tees">Hand-Painted Tees</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="/client/about.html">About Us</a></li><li><a href="/client/contact.html">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li><li><a href="mailto:hello@nodalis.com">hello@nodalis.com</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Nodalis. All rights reserved.</span><span>Handmade with ♥ in Sri Lanka</span></div>
+</footer><script src="/js/script.js"></script><script src="/js/cart.js"></script></body></html>
