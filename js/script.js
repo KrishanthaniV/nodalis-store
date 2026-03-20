@@ -174,3 +174,58 @@ function showToast(message, type) {
     setTimeout(function() { toast.remove(); }, 300);
   }, 3000);
 }
+
+
+// ---- PRODUCT CARD HOVER — show 2nd image ----
+document.addEventListener('mouseover', function(e) {
+  var card = e.target.closest('.product-card-image');
+  if (!card) return;
+  var hoverImg = card.getAttribute('data-hover-img');
+  var mainImg = card.querySelector('img');
+  if (hoverImg && mainImg && mainImg.getAttribute('data-original') !== 'set') {
+    mainImg.setAttribute('data-original', 'set');
+    mainImg.setAttribute('data-original-src', mainImg.src);
+  }
+  if (hoverImg && mainImg) {
+    mainImg.src = hoverImg;
+  }
+});
+document.addEventListener('mouseout', function(e) {
+  var card = e.target.closest('.product-card-image');
+  if (!card) return;
+  var mainImg = card.querySelector('img');
+  if (mainImg && mainImg.getAttribute('data-original-src')) {
+    mainImg.src = mainImg.getAttribute('data-original-src');
+  }
+});
+
+
+// ---- AUTO-ADD hover images to product cards ----
+(function() {
+  function addHoverImages() {
+    document.querySelectorAll('.product-card').forEach(function(card) {
+      var cardImg = card.querySelector('.product-card-image');
+      if (!cardImg || cardImg.getAttribute('data-hover-img')) return;
+      // Try to get product data from the card's link or data attribute
+      var link = card.closest('a') || card.querySelector('a');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      var productId = '';
+      if (href.includes('id=')) productId = href.split('id=')[1].split('&')[0];
+      // Find product in loaded data
+      if (typeof allProducts !== 'undefined' && allProducts.length > 0) {
+        var prod = allProducts.find(function(p) { return p._id === productId; });
+        if (prod && prod.images && prod.images.length > 1) {
+          cardImg.setAttribute('data-hover-img', prod.images[1].url);
+        }
+      }
+    });
+  }
+  // Run after products load
+  var origFetch = window.fetch;
+  setInterval(addHoverImages, 2000);
+  // Also run on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(addHoverImages, 1500);
+  });
+})();

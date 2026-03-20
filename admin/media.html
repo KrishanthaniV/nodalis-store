@@ -320,6 +320,10 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 @media(max-width:768px){.categories-grid{grid-template-columns:1fr 1fr;gap:1rem}.product-layout{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.checkout-layout{grid-template-columns:1fr}.newsletter-form{flex-direction:column}.about-values{grid-template-columns:1fr}.insta-grid{grid-template-columns:repeat(3,1fr)}.hero{min-height:80vh}}
 @media(max-width:480px){.categories-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}.insta-grid{grid-template-columns:repeat(2,1fr)}}
 
+
+/* PRODUCT CARD HOVER IMAGE */
+.product-card-image img{transition:opacity .3s ease,transform .7s cubic-bezier(.4,0,.2,1)}
+.product-card-image[data-hover-img]:hover img{opacity:.95}
 </style>
 </head>
 <body>

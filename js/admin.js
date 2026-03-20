@@ -78,8 +78,13 @@ function openProductModal(productId) {
       document.getElementById('prodFeatured').checked = p.featured || false;
       document.getElementById('prodHandmade').checked = (p.badges || []).includes('handmade');
       document.getElementById('prodLimited').checked = (p.badges || []).includes('limited');
-      if (p.images && p.images.length > 0 && p.images[0].url) {
-        document.getElementById('imagePreview').innerHTML = '<img src="' + p.images[0].url + '" style="width:100px;height:100px;object-fit:cover;border-radius:var(--radius-sm);"><p class="text-small" style="color:var(--sage-dark);">Current image</p>';
+      if (p.images && p.images.length > 0) {
+        var previewHtml = '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+        p.images.forEach(function(img, idx) {
+          if (img.url) previewHtml += '<img src="' + img.url + '" style="width:80px;height:80px;object-fit:cover;">';
+        });
+        previewHtml += '</div><p style="font-size:.7rem;color:var(--grey);margin-top:6px;">' + p.images.length + ' image(s) — upload new to replace</p>';
+        document.getElementById('imagePreview').innerHTML = previewHtml;
       }
     }
   } else {
@@ -132,18 +137,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Step 1: Upload image if selected
     var imageInput = document.getElementById('prodImageInput');
-    if (imageInput && imageInput.files && imageInput.files[0]) {
-      var formData = new FormData();
-      formData.append('image', imageInput.files[0]);
-      try {
-        var uploadRes = await fetch('/api/upload', {
-          method: 'POST',
+    if (imageInput && imageInput.files && imageInput.files.length > 0) {
+      // Upload up to 4 images
+      var filesToUpload = Array.from(imageInput.files).slice(0, 4);
+      for (var i = 0; i < filesToUpload.length; i++) {
+        var formData = new FormData();
+        formData.append('image', filesToUpload[i]);
+        try {
+          var uploadRes = await fetch('/api/upload', {
+            method: 'POST',
           headers: { 'Authorization': 'Bearer ' + token },
           body: formData
         });
         if (uploadRes.ok) {
           var uploadData = await uploadRes.json();
-          productData.images = [{ url: uploadData.url, alt: productData.name }];
+          productData.images.push({ url: uploadData.url, alt: productData.name });
           console.log('Image uploaded:', uploadData.url);
         } else {
           console.log('Upload failed:', uploadRes.status);
