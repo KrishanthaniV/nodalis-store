@@ -159,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (err) {
         console.log('Image upload error:', err);
       }
+      } // end for loop
     }
 
     // If editing and no new image uploaded, keep existing
