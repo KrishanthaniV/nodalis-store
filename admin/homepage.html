@@ -328,37 +328,20 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 </head>
 <body>
 <div class="admin-layout">
-  <!-- SIDEBAR -->
   <aside class="admin-sidebar">
     <div class="logo-area">
       <a href="/"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis"></a>
       <p class="admin-subtitle">Admin Panel</p>
     </div>
     <nav class="admin-nav">
-      <a href="/admin/dashboard.html" class="admin-nav-item">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Dashboard
-      </a>
-      <a href="/admin/products.html" class="admin-nav-item">
-        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        Products
-      </a>
-      <a href="/admin/orders.html" class="admin-nav-item">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Orders
-      </a>
-      <a href="/admin/homepage.html" class="admin-nav-item active">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        Homepage
-      </a>
-      <a href="/admin/media.html" class="admin-nav-item">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Media
-      </a>
+      <a href="/admin/dashboard.html" class="admin-nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Dashboard</a>
+      <a href="/admin/products.html" class="admin-nav-item"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Products</a>
+      <a href="/admin/orders.html" class="admin-nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Orders</a>
+      <a href="/admin/homepage.html" class="admin-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Homepage</a>
+      <a href="/admin/media.html" class="admin-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Media</a>
     </nav>
   </aside>
 
-  <!-- MAIN -->
   <main class="admin-main">
     <div class="admin-header">
       <h1>Homepage Editor</h1>
@@ -397,18 +380,13 @@ input,textarea,select{font-family:inherit;font-size:1rem}
         </div>
       </div>
       <div class="form-group">
-        <label>Hero Media Type</label>
-        <select id="heroMediaType">
-          <option value="placeholder">Dark Gradient (default)</option>
-          <option value="image">Image</option>
-          <option value="video">Video</option>
-        </select>
+        <label>Hero Background (image or video)</label>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <input type="file" id="heroMediaFile" accept="image/*,video/*" style="flex:1;padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;">
+          <span id="heroMediaStatus" style="font-size:.75rem;color:var(--grey);"></span>
+        </div>
+        <div id="heroMediaPreview" style="margin-top:.8rem;"></div>
       </div>
-      <div class="form-group" id="heroMediaUrlGroup" style="display:none;">
-        <label>Media URL (upload via Media page first, then paste URL)</label>
-        <input type="text" id="heroMediaUrl" placeholder="/uploads/hero-image.jpg or /uploads/hero-video.mp4">
-      </div>
-      <div id="heroMediaPreview" style="margin-top:.5rem;"></div>
     </div>
 
     <!-- ABOUT PREVIEW -->
@@ -422,15 +400,17 @@ input,textarea,select{font-family:inherit;font-size:1rem}
         <label>Description</label>
         <textarea id="aboutDesc" rows="3" placeholder="Our pieces are crafted by hand in small batches..."></textarea>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Button Text</label>
-          <input type="text" id="aboutCtaText" placeholder="Discover Our Story">
+      <div class="form-group">
+        <label>Button Text</label>
+        <input type="text" id="aboutCtaText" placeholder="Discover Our Story">
+      </div>
+      <div class="form-group">
+        <label>About Image</label>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <input type="file" id="aboutImageFile" accept="image/*" style="flex:1;padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;">
+          <span id="aboutImageStatus" style="font-size:.75rem;color:var(--grey);"></span>
         </div>
-        <div class="form-group">
-          <label>Image URL</label>
-          <input type="text" id="aboutImageUrl" placeholder="/uploads/about-image.jpg">
-        </div>
+        <div id="aboutImagePreview" style="margin-top:.8rem;"></div>
       </div>
     </div>
 
@@ -463,31 +443,48 @@ input,textarea,select{font-family:inherit;font-size:1rem}
     <!-- CATEGORY IMAGES -->
     <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
       <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Category Card Images</h3>
-      <p style="font-size:.82rem;color:var(--grey);margin-bottom:1rem;">Upload images via the Media page, then paste the URL here for each category.</p>
       <div class="form-row">
         <div class="form-group">
-          <label>Crochet Tops Image</label>
-          <input type="text" id="catCrochetImg" placeholder="/uploads/cat-crochet.jpg">
+          <label>Crochet Tops</label>
+          <input type="file" id="catCrochetFile" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;">
+          <div id="catCrochetPreview" style="margin-top:.5rem;"></div>
         </div>
         <div class="form-group">
-          <label>Bags Image</label>
-          <input type="text" id="catBagsImg" placeholder="/uploads/cat-bags.jpg">
+          <label>Bags</label>
+          <input type="file" id="catBagsFile" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;">
+          <div id="catBagsPreview" style="margin-top:.5rem;"></div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Hand-Painted Tees Image</label>
-          <input type="text" id="catTeesImg" placeholder="/uploads/cat-tees.jpg">
+          <label>Hand-Painted Tees</label>
+          <input type="file" id="catTeesFile" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;">
+          <div id="catTeesPreview" style="margin-top:.5rem;"></div>
         </div>
         <div class="form-group">
-          <label>Accessories Image</label>
-          <input type="text" id="catAccessoriesImg" placeholder="/uploads/cat-accessories.jpg">
+          <label>Accessories</label>
+          <input type="file" id="catAccessoriesFile" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;">
+          <div id="catAccessoriesPreview" style="margin-top:.5rem;"></div>
         </div>
       </div>
     </div>
 
+    <!-- INSTAGRAM IMAGES -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Instagram Section Images (6 images)</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+        <div class="form-group"><label>Image 1</label><input type="file" id="insta1File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta1Preview" style="margin-top:.5rem;"></div></div>
+        <div class="form-group"><label>Image 2</label><input type="file" id="insta2File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta2Preview" style="margin-top:.5rem;"></div></div>
+        <div class="form-group"><label>Image 3</label><input type="file" id="insta3File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta3Preview" style="margin-top:.5rem;"></div></div>
+        <div class="form-group"><label>Image 4</label><input type="file" id="insta4File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta4Preview" style="margin-top:.5rem;"></div></div>
+        <div class="form-group"><label>Image 5</label><input type="file" id="insta5File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta5Preview" style="margin-top:.5rem;"></div></div>
+        <div class="form-group"><label>Image 6</label><input type="file" id="insta6File" accept="image/*" style="padding:.5rem;border:1px solid var(--cream-dark);font-size:.85rem;width:100%;"><div id="insta6Preview" style="margin-top:.5rem;"></div></div>
+      </div>
+    </div>
+
     <div style="text-align:center;padding:2rem 0;">
-      <button class="btn-luxury btn-dark" onclick="saveAllSections()">Save All Changes</button>
+      <button class="btn-luxury btn-dark" onclick="saveAllSections()" id="saveBtn">Save All Changes</button>
+      <p style="font-size:.75rem;color:var(--grey);margin-top:.5rem;">Images will be uploaded automatically when you save.</p>
     </div>
   </main>
 </div>
@@ -495,14 +492,61 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 <div class="toast" id="toast"></div>
 
 <script>
-var token = localStorage.getItem('nodalis_token') || localStorage.getItem('nodalis_token');
+var token = localStorage.getItem('nodalis_token');
 if (!token) window.location.href = '/client/login.html';
 
-var heroMediaType = document.getElementById('heroMediaType');
-var heroMediaUrlGroup = document.getElementById('heroMediaUrlGroup');
-heroMediaType.addEventListener('change', function() {
-  heroMediaUrlGroup.style.display = this.value === 'placeholder' ? 'none' : 'block';
-});
+// Store uploaded URLs
+var uploadedUrls = {
+  heroMedia: '', aboutImage: '',
+  catCrochet: '', catBags: '', catTees: '', catAccessories: '',
+  insta1: '', insta2: '', insta3: '', insta4: '', insta5: '', insta6: ''
+};
+
+// Upload a single file and return the URL
+async function uploadFile(fileInput) {
+  if (!fileInput || !fileInput.files || !fileInput.files[0]) return null;
+  var formData = new FormData();
+  formData.append('image', fileInput.files[0]);
+  try {
+    var res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token },
+      body: formData
+    });
+    if (res.ok) {
+      var data = await res.json();
+      return data.url;
+    }
+  } catch (err) {
+    console.error('Upload error:', err);
+  }
+  return null;
+}
+
+// Show preview for file inputs
+function setupPreview(inputId, previewId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('change', function() {
+    var file = this.files[0];
+    if (!file) return;
+    var preview = document.getElementById(previewId);
+    if (file.type.startsWith('video/')) {
+      preview.innerHTML = '<video src="' + URL.createObjectURL(file) + '" style="width:120px;height:80px;object-fit:cover;" muted></video>';
+    } else {
+      preview.innerHTML = '<img src="' + URL.createObjectURL(file) + '" style="width:120px;height:80px;object-fit:cover;">';
+    }
+  });
+}
+
+// Setup all previews
+setupPreview('heroMediaFile', 'heroMediaPreview');
+setupPreview('aboutImageFile', 'aboutImagePreview');
+setupPreview('catCrochetFile', 'catCrochetPreview');
+setupPreview('catBagsFile', 'catBagsPreview');
+setupPreview('catTeesFile', 'catTeesPreview');
+setupPreview('catAccessoriesFile', 'catAccessoriesPreview');
+for (var i = 1; i <= 6; i++) setupPreview('insta' + i + 'File', 'insta' + i + 'Preview');
 
 // Load existing content
 async function loadContent() {
@@ -511,7 +555,6 @@ async function loadContent() {
     if (!res.ok) return;
     var data = await res.json();
 
-    // Hero
     if (data.hero) {
       document.getElementById('heroEyebrow').value = data.hero.heroEyebrow || '';
       document.getElementById('heroTitle').value = data.hero.heroTitle || '';
@@ -519,44 +562,60 @@ async function loadContent() {
       document.getElementById('heroDesc').value = data.hero.heroDescription || '';
       document.getElementById('heroCtaText').value = data.hero.heroCtaText || '';
       document.getElementById('heroCtaLink').value = data.hero.heroCtaLink || '';
-      document.getElementById('heroMediaType').value = data.hero.heroMediaType || 'placeholder';
-      document.getElementById('heroMediaUrl').value = data.hero.heroMediaUrl || '';
-      if (data.hero.heroMediaType !== 'placeholder') heroMediaUrlGroup.style.display = 'block';
+      if (data.hero.heroMediaUrl) {
+        uploadedUrls.heroMedia = data.hero.heroMediaUrl;
+        var isVideo = data.hero.heroMediaUrl.match(/\.(mp4|webm|mov)$/i);
+        document.getElementById('heroMediaPreview').innerHTML = isVideo
+          ? '<video src="' + data.hero.heroMediaUrl + '" style="width:200px;height:120px;object-fit:cover;" muted controls></video><p style="font-size:.7rem;color:var(--grey);">Current hero media</p>'
+          : '<img src="' + data.hero.heroMediaUrl + '" style="width:200px;height:120px;object-fit:cover;"><p style="font-size:.7rem;color:var(--grey);">Current hero image</p>';
+        document.getElementById('heroMediaStatus').textContent = 'Current: ' + data.hero.heroMediaUrl;
+      }
     }
 
-    // About
     if (data['about-preview']) {
       var a = data['about-preview'];
       document.getElementById('aboutTitle').value = a.aboutTitle || '';
       document.getElementById('aboutDesc').value = a.aboutDescription || '';
       document.getElementById('aboutCtaText').value = a.aboutCtaText || '';
-      document.getElementById('aboutImageUrl').value = a.aboutImageUrl || '';
+      if (a.aboutImageUrl) {
+        uploadedUrls.aboutImage = a.aboutImageUrl;
+        document.getElementById('aboutImagePreview').innerHTML = '<img src="' + a.aboutImageUrl + '" style="width:120px;height:80px;object-fit:cover;"><p style="font-size:.7rem;color:var(--grey);">Current</p>';
+      }
     }
 
-    // Highlight
     if (data.highlight) {
       document.getElementById('highlightQuote').value = data.highlight.highlightQuote || '';
       document.getElementById('highlightAuthor').value = data.highlight.highlightAuthor || '';
     }
 
-    // Newsletter
     if (data.newsletter) {
       document.getElementById('newsletterTitle').value = data.newsletter.newsletterTitle || '';
       document.getElementById('newsletterDesc').value = data.newsletter.newsletterDescription || '';
     }
 
-    // Categories
     if (data.categories && data.categories.categories) {
-      var cats = data.categories.categories;
-      cats.forEach(function(c) {
-        if (c.slug === 'crochet-tops') document.getElementById('catCrochetImg').value = c.imageUrl || '';
-        if (c.slug === 'bags') document.getElementById('catBagsImg').value = c.imageUrl || '';
-        if (c.slug === 'hand-painted-tees') document.getElementById('catTeesImg').value = c.imageUrl || '';
-        if (c.slug === 'accessories') document.getElementById('catAccessoriesImg').value = c.imageUrl || '';
+      data.categories.categories.forEach(function(c) {
+        var key = c.slug === 'crochet-tops' ? 'catCrochet' : c.slug === 'bags' ? 'catBags' : c.slug === 'hand-painted-tees' ? 'catTees' : c.slug === 'accessories' ? 'catAccessories' : '';
+        if (key && c.imageUrl) {
+          uploadedUrls[key] = c.imageUrl;
+          var previewId = key + 'Preview';
+          var el = document.getElementById(previewId);
+          if (el) el.innerHTML = '<img src="' + c.imageUrl + '" style="width:120px;height:80px;object-fit:cover;">';
+        }
+      });
+    }
+
+    if (data.instagram && data.instagram.instagramImages) {
+      data.instagram.instagramImages.forEach(function(img, idx) {
+        if (img.url) {
+          uploadedUrls['insta' + (idx + 1)] = img.url;
+          var el = document.getElementById('insta' + (idx + 1) + 'Preview');
+          if (el) el.innerHTML = '<img src="' + img.url + '" style="width:120px;height:80px;object-fit:cover;">';
+        }
       });
     }
   } catch (err) {
-    console.log('No saved content yet — using defaults');
+    console.log('No saved content yet');
   }
 }
 
@@ -570,7 +629,55 @@ async function saveSection(section, data) {
 }
 
 async function saveAllSections() {
+  var btn = document.getElementById('saveBtn');
+  btn.textContent = 'Uploading & Saving...';
+  btn.disabled = true;
+
   try {
+    // Upload any new files first
+    var heroFile = document.getElementById('heroMediaFile');
+    if (heroFile.files.length > 0) {
+      var url = await uploadFile(heroFile);
+      if (url) uploadedUrls.heroMedia = url;
+    }
+
+    var aboutFile = document.getElementById('aboutImageFile');
+    if (aboutFile.files.length > 0) {
+      var url = await uploadFile(aboutFile);
+      if (url) uploadedUrls.aboutImage = url;
+    }
+
+    // Category images
+    var catFiles = [
+      { id: 'catCrochetFile', key: 'catCrochet' },
+      { id: 'catBagsFile', key: 'catBags' },
+      { id: 'catTeesFile', key: 'catTees' },
+      { id: 'catAccessoriesFile', key: 'catAccessories' }
+    ];
+    for (var c of catFiles) {
+      var f = document.getElementById(c.id);
+      if (f && f.files.length > 0) {
+        var url = await uploadFile(f);
+        if (url) uploadedUrls[c.key] = url;
+      }
+    }
+
+    // Instagram images
+    for (var i = 1; i <= 6; i++) {
+      var f = document.getElementById('insta' + i + 'File');
+      if (f && f.files.length > 0) {
+        var url = await uploadFile(f);
+        if (url) uploadedUrls['insta' + i] = url;
+      }
+    }
+
+    // Determine hero media type
+    var heroMediaType = 'placeholder';
+    if (uploadedUrls.heroMedia) {
+      heroMediaType = uploadedUrls.heroMedia.match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image';
+    }
+
+    // Save all sections
     var results = await Promise.all([
       saveSection('hero', {
         heroEyebrow: document.getElementById('heroEyebrow').value,
@@ -579,14 +686,14 @@ async function saveAllSections() {
         heroDescription: document.getElementById('heroDesc').value,
         heroCtaText: document.getElementById('heroCtaText').value,
         heroCtaLink: document.getElementById('heroCtaLink').value,
-        heroMediaType: document.getElementById('heroMediaType').value,
-        heroMediaUrl: document.getElementById('heroMediaUrl').value
+        heroMediaType: heroMediaType,
+        heroMediaUrl: uploadedUrls.heroMedia
       }),
       saveSection('about-preview', {
         aboutTitle: document.getElementById('aboutTitle').value,
         aboutDescription: document.getElementById('aboutDesc').value,
         aboutCtaText: document.getElementById('aboutCtaText').value,
-        aboutImageUrl: document.getElementById('aboutImageUrl').value
+        aboutImageUrl: uploadedUrls.aboutImage
       }),
       saveSection('highlight', {
         highlightQuote: document.getElementById('highlightQuote').value,
@@ -598,30 +705,40 @@ async function saveAllSections() {
       }),
       saveSection('categories', {
         categories: [
-          { name: 'Crochet Tops', slug: 'crochet-tops', imageUrl: document.getElementById('catCrochetImg').value },
-          { name: 'Bags', slug: 'bags', imageUrl: document.getElementById('catBagsImg').value },
-          { name: 'Hand-Painted Tees', slug: 'hand-painted-tees', imageUrl: document.getElementById('catTeesImg').value },
-          { name: 'Accessories', slug: 'accessories', imageUrl: document.getElementById('catAccessoriesImg').value }
+          { name: 'Crochet Tops', slug: 'crochet-tops', imageUrl: uploadedUrls.catCrochet },
+          { name: 'Bags', slug: 'bags', imageUrl: uploadedUrls.catBags },
+          { name: 'Hand-Painted Tees', slug: 'hand-painted-tees', imageUrl: uploadedUrls.catTees },
+          { name: 'Accessories', slug: 'accessories', imageUrl: uploadedUrls.catAccessories }
+        ]
+      }),
+      saveSection('instagram', {
+        instagramHandle: '@nodalis.lk',
+        instagramImages: [
+          { url: uploadedUrls.insta1 }, { url: uploadedUrls.insta2 }, { url: uploadedUrls.insta3 },
+          { url: uploadedUrls.insta4 }, { url: uploadedUrls.insta5 }, { url: uploadedUrls.insta6 }
         ]
       })
     ]);
 
-    if (results.every(r => r)) {
+    if (results.every(function(r) { return r; })) {
       showToast('All sections saved!', 'success');
     } else {
       showToast('Some sections failed to save', 'error');
     }
   } catch (err) {
-    showToast('Error saving: ' + err.message, 'error');
+    showToast('Error: ' + err.message, 'error');
   }
+
+  btn.textContent = 'Save All Changes';
+  btn.disabled = false;
 }
 
 function showToast(msg, type) {
-  var toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.style.background = type === 'success' ? '#7BA06B' : type === 'error' ? '#C45B5B' : 'var(--charcoal)';
-  toast.classList.add('show');
-  setTimeout(function() { toast.classList.remove('show'); }, 3000);
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = type === 'success' ? '#7BA06B' : type === 'error' ? '#C45B5B' : 'var(--charcoal)';
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
 loadContent();

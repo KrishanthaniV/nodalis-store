@@ -673,6 +673,17 @@ document.getElementById('newsletterForm')?.addEventListener('submit', (e) => {
       });
     }
 
+  
+    // Instagram images
+    if (data.instagram && data.instagram.instagramImages) {
+      var instaItems = document.querySelectorAll('.insta-item');
+      data.instagram.instagramImages.forEach(function(img, idx) {
+        if (img.url && instaItems[idx]) {
+          instaItems[idx].innerHTML = '<img src="' + img.url + '" alt="Instagram">';
+        }
+      });
+    }
+
   } catch (err) {
     console.log('Using default homepage content');
   }
