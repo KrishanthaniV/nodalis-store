@@ -17,6 +17,7 @@ const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
 const uploadRoutes = require('./routes/upload');
+const contentRoutes = require('./routes/content');
 
 // Import config
 const { MONGODB_URI, PORT, JWT_SECRET } = require('./config/config');
@@ -43,6 +44,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/content', contentRoutes);
 
 // ---- Contact Form Endpoint ----
 app.post('/api/contact', (req, res) => {

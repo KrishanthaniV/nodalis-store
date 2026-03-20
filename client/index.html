@@ -579,5 +579,105 @@ document.getElementById('newsletterForm')?.addEventListener('submit', (e) => {
   e.target.reset();
 });
 </script>
+
+<script>
+// ---- DYNAMIC HOMEPAGE CONTENT ----
+(async function loadHomepageContent() {
+  try {
+    var res = await fetch('/api/content');
+    if (!res.ok) return;
+    var data = await res.json();
+
+    // Hero
+    if (data.hero) {
+      var h = data.hero;
+      var eyebrow = document.querySelector('.hero-eyebrow');
+      var title = document.querySelector('.hero-content h1');
+      var sub = document.querySelector('.hero-sub');
+      var cta = document.querySelector('.hero-cta');
+      var media = document.querySelector('.hero-media');
+
+      if (eyebrow && h.heroEyebrow) eyebrow.textContent = h.heroEyebrow;
+      if (title && h.heroTitle) title.innerHTML = h.heroTitle + '<br><em>' + (h.heroTitleEm || '') + '</em>';
+      if (sub && h.heroDescription) sub.textContent = h.heroDescription;
+      if (cta && h.heroCtaText) {
+        var svgHtml = cta.querySelector('svg') ? cta.querySelector('svg').outerHTML : '';
+        cta.innerHTML = h.heroCtaText + ' ' + svgHtml;
+        if (h.heroCtaLink) cta.setAttribute('href', h.heroCtaLink);
+      }
+
+      // Hero media
+      if (media && h.heroMediaType === 'image' && h.heroMediaUrl) {
+        media.innerHTML = '<img src="' + h.heroMediaUrl + '" alt="Nodalis Hero" style="width:100%;height:100%;object-fit:cover;opacity:.5;">';
+      } else if (media && h.heroMediaType === 'video' && h.heroMediaUrl) {
+        media.innerHTML = '<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;opacity:.5;"><source src="' + h.heroMediaUrl + '"></video>';
+      }
+    }
+
+    // About preview
+    if (data['about-preview']) {
+      var a = data['about-preview'];
+      var aboutSection = document.querySelector('.about-preview-content');
+      if (aboutSection) {
+        var aboutTitle = aboutSection.querySelector('.section-title, h2');
+        var aboutDesc = aboutSection.querySelector('.section-desc, p:not(.section-eyebrow)');
+        var aboutCta = aboutSection.querySelector('a');
+        if (aboutTitle && a.aboutTitle) aboutTitle.textContent = a.aboutTitle;
+        if (aboutDesc && a.aboutDescription) aboutDesc.textContent = a.aboutDescription;
+        if (aboutCta && a.aboutCtaText) aboutCta.textContent = a.aboutCtaText;
+      }
+      // About image
+      if (a.aboutImageUrl) {
+        var aboutImg = document.querySelector('.about-preview-image img');
+        if (aboutImg) aboutImg.src = a.aboutImageUrl;
+        else {
+          var aboutImgDiv = document.querySelector('.about-preview-image');
+          if (aboutImgDiv) aboutImgDiv.innerHTML = '<img src="' + a.aboutImageUrl + '" alt="About Nodalis">';
+        }
+      }
+    }
+
+    // Highlight quote
+    if (data.highlight) {
+      var q = data.highlight;
+      var blockquote = document.querySelector('.highlight-section blockquote');
+      var cite = document.querySelector('.highlight-section cite');
+      if (blockquote && q.highlightQuote) blockquote.textContent = q.highlightQuote;
+      if (cite && q.highlightAuthor) cite.textContent = q.highlightAuthor;
+    }
+
+    // Newsletter
+    if (data.newsletter) {
+      var n = data.newsletter;
+      var nlSection = document.querySelector('.newsletter-section, .newsletter');
+      if (nlSection) {
+        var nlTitle = nlSection.querySelector('.section-title');
+        var nlDesc = nlSection.querySelector('.section-desc');
+        if (nlTitle && n.newsletterTitle) nlTitle.textContent = n.newsletterTitle;
+        if (nlDesc && n.newsletterDescription) nlDesc.textContent = n.newsletterDescription;
+      }
+    }
+
+    // Category images
+    if (data.categories && data.categories.categories) {
+      data.categories.categories.forEach(function(cat) {
+        if (!cat.imageUrl) return;
+        var slug = cat.slug;
+        var cardBg = document.querySelector('.cat-' + slug.replace('-', ''));
+        if (!cardBg) cardBg = document.querySelector('[class*="cat-' + slug.split('-')[0] + '"]');
+        if (cardBg) {
+          cardBg.style.backgroundImage = 'url(' + cat.imageUrl + ')';
+          cardBg.style.backgroundSize = 'cover';
+          cardBg.style.backgroundPosition = 'center';
+        }
+      });
+    }
+
+  } catch (err) {
+    console.log('Using default homepage content');
+  }
+})();
+</script>
+
 </body>
 </html>

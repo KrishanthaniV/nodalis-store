@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Media Library — Nodalis Admin</title>
+  <title>Homepage Editor — Admin Dashboard — Nodalis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -327,145 +327,304 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 </style>
 </head>
 <body>
-  <div class="admin-layout">
-    <aside class="admin-sidebar">
-      <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis" style="height: 50px; width: auto; object-fit: contain;"></a>
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="logo-area">
+      <a href="/"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis"></a>
       <p class="admin-subtitle">Admin Panel</p>
-      <nav class="admin-nav">
-        <a href="/admin/dashboard.html" class="admin-nav-item">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Dashboard
-        </a>
-        <a href="/admin/products.html" class="admin-nav-item">
-          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Products
-        </a>
-        <a href="/admin/orders.html" class="admin-nav-item">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Orders
-        </a>
-      <a href="/admin/homepage.html" class="admin-nav-item">
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin/dashboard.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard
+      </a>
+      <a href="/admin/products.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Products
+      </a>
+      <a href="/admin/orders.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Orders
+      </a>
+      <a href="/admin/homepage.html" class="admin-nav-item active">
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
         Homepage
       </a>
-        <a href="/admin/media.html" class="admin-nav-item active">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          Media Library
-        </a>
-        <div style="margin-top: var(--space-3xl); padding-top: var(--space-lg); border-top: 1px solid rgba(212,197,181,0.15);">
-          <a href="/" class="admin-nav-item">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            View Store
-          </a>
-        </div>
-      </nav>
-    </aside>
+      <a href="/admin/media.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Media
+      </a>
+    </nav>
+  </aside>
 
-    <main class="admin-main">
-      <div class="admin-header">
-        <div>
-          <h1>Media Library</h1>
-          <p style="color: var(--charcoal-light);">Upload and manage your product images and brand assets</p>
-        </div>
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Homepage Editor</h1>
+      <button class="btn-luxury btn-gold" onclick="saveAllSections()">Save All Changes</button>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Hero Section</h3>
+      <div class="form-group">
+        <label>Eyebrow Text</label>
+        <input type="text" id="heroEyebrow" placeholder="Handcrafted · Limited Edition · One of a Kind">
       </div>
-
-      <!-- Upload Zone -->
-      <div class="upload-zone" id="mediaUploadZone">
-        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        <p style="font-size:1.1rem;font-weight:500;">Drop files here or click to upload</p>
-        <p class="text-small" style="color:var(--charcoal-light);">JPG, PNG, GIF up to 5MB each</p>
-        <input type="file" id="mediaFileInput" multiple accept="image/*" style="display:none">
-      </div>
-
-      <!-- Media Grid -->
-      <div class="admin-table-card" style="padding: var(--space-lg);">
-        <h3 style="margin-bottom: var(--space-lg);">Uploaded Images</h3>
-        <div class="media-grid" id="mediaGrid">
-          <!-- Placeholder items -->
-          <div class="media-item" style="background: var(--sage-light); display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:var(--font-accent);color:var(--sage-dark);">Logo</span>
-          </div>
-          <div class="media-item" style="background: var(--beige);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:var(--font-accent);color:var(--warm-brown);">Banner</span>
-          </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Title (main text)</label>
+          <input type="text" id="heroTitle" placeholder="The Art of">
         </div>
-        <p id="mediaEmpty" class="text-small" style="color:var(--charcoal-light);text-align:center;padding:var(--space-xl);display:none;">
-          Upload images to populate your media library.
-        </p>
-      </div>
-
-      <!-- Logo Management -->
-      <div class="admin-table-card" style="padding: var(--space-xl); margin-top: var(--space-xl);">
-        <h3 style="margin-bottom: var(--space-md);">Brand Logo</h3>
-        <p style="color:var(--charcoal-light);margin-bottom:var(--space-lg);font-size:0.9rem;">
-          Upload a new logo to replace the text-based Nodalis logo across the site.
-        </p>
-        <div style="display:flex;align-items:center;gap:var(--space-xl);">
-          <div style="width:120px;height:120px;border-radius:var(--radius-md);background:var(--beige);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:600;letter-spacing:0.05em;">NODALIS</span>
-          </div>
-          <div>
-            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('logoInput').click()">Upload Logo</button>
-            <input type="file" id="logoInput" accept="image/*" style="display:none">
-            <p class="text-small" style="color:var(--charcoal-light);margin-top:var(--space-sm);">Recommended: 400×100px, PNG with transparency</p>
-          </div>
+        <div class="form-group">
+          <label>Title (italic/gold part)</label>
+          <input type="text" id="heroTitleEm" placeholder="Handmade">
         </div>
       </div>
-    </main>
-  </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="heroDesc" rows="2" placeholder="Crocheted pieces, hand-painted tees & artisan accessories..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Button Text</label>
+          <input type="text" id="heroCtaText" placeholder="Discover the Collection">
+        </div>
+        <div class="form-group">
+          <label>Button Link</label>
+          <input type="text" id="heroCtaLink" placeholder="/client/shop.html">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Hero Media Type</label>
+        <select id="heroMediaType">
+          <option value="placeholder">Dark Gradient (default)</option>
+          <option value="image">Image</option>
+          <option value="video">Video</option>
+        </select>
+      </div>
+      <div class="form-group" id="heroMediaUrlGroup" style="display:none;">
+        <label>Media URL (upload via Media page first, then paste URL)</label>
+        <input type="text" id="heroMediaUrl" placeholder="/uploads/hero-image.jpg or /uploads/hero-video.mp4">
+      </div>
+      <div id="heroMediaPreview" style="margin-top:.5rem;"></div>
+    </div>
 
-  <div class="toast-container" id="toastContainer"></div>
+    <!-- ABOUT PREVIEW -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">About Preview Section</h3>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="aboutTitle" placeholder="Every Piece Tells a Story">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="aboutDesc" rows="3" placeholder="Our pieces are crafted by hand in small batches..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Button Text</label>
+          <input type="text" id="aboutCtaText" placeholder="Discover Our Story">
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="text" id="aboutImageUrl" placeholder="/uploads/about-image.jpg">
+        </div>
+      </div>
+    </div>
 
-  <script src="/js/script.js"></script>
-  <script src="/js/admin.js"></script>
-  <script>
-    // Media Library interactions
-    const uploadZone = document.getElementById('mediaUploadZone');
-    const fileInput = document.getElementById('mediaFileInput');
+    <!-- HIGHLIGHT / QUOTE -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Highlight Quote</h3>
+      <div class="form-group">
+        <label>Quote Text</label>
+        <textarea id="highlightQuote" rows="2" placeholder="Fashion should be sustainable, personal, and made with love."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Author</label>
+        <input type="text" id="highlightAuthor" placeholder="— Nodalis">
+      </div>
+    </div>
 
-    uploadZone.addEventListener('click', () => fileInput.click());
-    uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
-    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-    uploadZone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      uploadZone.classList.remove('dragover');
-      handleMediaUpload(e.dataTransfer.files);
-    });
-    fileInput.addEventListener('change', () => handleMediaUpload(fileInput.files));
+    <!-- NEWSLETTER -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Newsletter Section</h3>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="newsletterTitle" placeholder="Join the Nodalis Circle">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="newsletterDesc" rows="2" placeholder="Be the first to know about new drops..."></textarea>
+      </div>
+    </div>
 
-    async function handleMediaUpload(files) {
-      for (const file of files) {
-        const formData = new FormData();
-        formData.append('image', file);
-        try {
-          const token = localStorage.getItem('nodalis_token');
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${token}` },
-            body: formData
-          });
-          if (res.ok) {
-            const data = await res.json();
-            addMediaItem(data.url, file.name);
-            showToast(`${file.name} uploaded!`, 'success');
-          }
-        } catch {
-          // Add placeholder for demo
-          addMediaItem(null, file.name);
-          showToast(`${file.name} uploaded (demo mode)`, 'success');
-        }
-      }
+    <!-- CATEGORY IMAGES -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Category Card Images</h3>
+      <p style="font-size:.82rem;color:var(--grey);margin-bottom:1rem;">Upload images via the Media page, then paste the URL here for each category.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Crochet Tops Image</label>
+          <input type="text" id="catCrochetImg" placeholder="/uploads/cat-crochet.jpg">
+        </div>
+        <div class="form-group">
+          <label>Bags Image</label>
+          <input type="text" id="catBagsImg" placeholder="/uploads/cat-bags.jpg">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Hand-Painted Tees Image</label>
+          <input type="text" id="catTeesImg" placeholder="/uploads/cat-tees.jpg">
+        </div>
+        <div class="form-group">
+          <label>Accessories Image</label>
+          <input type="text" id="catAccessoriesImg" placeholder="/uploads/cat-accessories.jpg">
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:2rem 0;">
+      <button class="btn-luxury btn-dark" onclick="saveAllSections()">Save All Changes</button>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var token = localStorage.getItem('adminToken') || localStorage.getItem('token');
+if (!token) window.location.href = '/client/login.html';
+
+var heroMediaType = document.getElementById('heroMediaType');
+var heroMediaUrlGroup = document.getElementById('heroMediaUrlGroup');
+heroMediaType.addEventListener('change', function() {
+  heroMediaUrlGroup.style.display = this.value === 'placeholder' ? 'none' : 'block';
+});
+
+// Load existing content
+async function loadContent() {
+  try {
+    var res = await fetch('/api/content');
+    if (!res.ok) return;
+    var data = await res.json();
+
+    // Hero
+    if (data.hero) {
+      document.getElementById('heroEyebrow').value = data.hero.heroEyebrow || '';
+      document.getElementById('heroTitle').value = data.hero.heroTitle || '';
+      document.getElementById('heroTitleEm').value = data.hero.heroTitleEm || '';
+      document.getElementById('heroDesc').value = data.hero.heroDescription || '';
+      document.getElementById('heroCtaText').value = data.hero.heroCtaText || '';
+      document.getElementById('heroCtaLink').value = data.hero.heroCtaLink || '';
+      document.getElementById('heroMediaType').value = data.hero.heroMediaType || 'placeholder';
+      document.getElementById('heroMediaUrl').value = data.hero.heroMediaUrl || '';
+      if (data.hero.heroMediaType !== 'placeholder') heroMediaUrlGroup.style.display = 'block';
     }
 
-    function addMediaItem(url, name) {
-      const grid = document.getElementById('mediaGrid');
-      const item = document.createElement('div');
-      item.className = 'media-item';
-      const hue = Math.random() * 360;
-      item.style.background = `hsl(${hue}, 20%, 82%)`;
-      item.innerHTML = `<span style="font-family:var(--font-accent);color:hsl(${hue},25%,45%);font-size:0.85rem;padding:0.5rem;text-align:center;">${name}</span>`;
-      grid.appendChild(item);
+    // About
+    if (data['about-preview']) {
+      var a = data['about-preview'];
+      document.getElementById('aboutTitle').value = a.aboutTitle || '';
+      document.getElementById('aboutDesc').value = a.aboutDescription || '';
+      document.getElementById('aboutCtaText').value = a.aboutCtaText || '';
+      document.getElementById('aboutImageUrl').value = a.aboutImageUrl || '';
     }
-  </script>
+
+    // Highlight
+    if (data.highlight) {
+      document.getElementById('highlightQuote').value = data.highlight.highlightQuote || '';
+      document.getElementById('highlightAuthor').value = data.highlight.highlightAuthor || '';
+    }
+
+    // Newsletter
+    if (data.newsletter) {
+      document.getElementById('newsletterTitle').value = data.newsletter.newsletterTitle || '';
+      document.getElementById('newsletterDesc').value = data.newsletter.newsletterDescription || '';
+    }
+
+    // Categories
+    if (data.categories && data.categories.categories) {
+      var cats = data.categories.categories;
+      cats.forEach(function(c) {
+        if (c.slug === 'crochet-tops') document.getElementById('catCrochetImg').value = c.imageUrl || '';
+        if (c.slug === 'bags') document.getElementById('catBagsImg').value = c.imageUrl || '';
+        if (c.slug === 'hand-painted-tees') document.getElementById('catTeesImg').value = c.imageUrl || '';
+        if (c.slug === 'accessories') document.getElementById('catAccessoriesImg').value = c.imageUrl || '';
+      });
+    }
+  } catch (err) {
+    console.log('No saved content yet — using defaults');
+  }
+}
+
+async function saveSection(section, data) {
+  var res = await fetch('/api/content/' + section, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify(data)
+  });
+  return res.ok;
+}
+
+async function saveAllSections() {
+  try {
+    var results = await Promise.all([
+      saveSection('hero', {
+        heroEyebrow: document.getElementById('heroEyebrow').value,
+        heroTitle: document.getElementById('heroTitle').value,
+        heroTitleEm: document.getElementById('heroTitleEm').value,
+        heroDescription: document.getElementById('heroDesc').value,
+        heroCtaText: document.getElementById('heroCtaText').value,
+        heroCtaLink: document.getElementById('heroCtaLink').value,
+        heroMediaType: document.getElementById('heroMediaType').value,
+        heroMediaUrl: document.getElementById('heroMediaUrl').value
+      }),
+      saveSection('about-preview', {
+        aboutTitle: document.getElementById('aboutTitle').value,
+        aboutDescription: document.getElementById('aboutDesc').value,
+        aboutCtaText: document.getElementById('aboutCtaText').value,
+        aboutImageUrl: document.getElementById('aboutImageUrl').value
+      }),
+      saveSection('highlight', {
+        highlightQuote: document.getElementById('highlightQuote').value,
+        highlightAuthor: document.getElementById('highlightAuthor').value
+      }),
+      saveSection('newsletter', {
+        newsletterTitle: document.getElementById('newsletterTitle').value,
+        newsletterDescription: document.getElementById('newsletterDesc').value
+      }),
+      saveSection('categories', {
+        categories: [
+          { name: 'Crochet Tops', slug: 'crochet-tops', imageUrl: document.getElementById('catCrochetImg').value },
+          { name: 'Bags', slug: 'bags', imageUrl: document.getElementById('catBagsImg').value },
+          { name: 'Hand-Painted Tees', slug: 'hand-painted-tees', imageUrl: document.getElementById('catTeesImg').value },
+          { name: 'Accessories', slug: 'accessories', imageUrl: document.getElementById('catAccessoriesImg').value }
+        ]
+      })
+    ]);
+
+    if (results.every(r => r)) {
+      showToast('All sections saved!', 'success');
+    } else {
+      showToast('Some sections failed to save', 'error');
+    }
+  } catch (err) {
+    showToast('Error saving: ' + err.message, 'error');
+  }
+}
+
+function showToast(msg, type) {
+  var toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.background = type === 'success' ? '#7BA06B' : type === 'error' ? '#C45B5B' : 'var(--charcoal)';
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+
+loadContent();
+</script>
 </body>
 </html>
