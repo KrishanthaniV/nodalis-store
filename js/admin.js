@@ -138,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Step 1: Upload image if selected
     var imageInput = document.getElementById('prodImageInput');
     if (imageInput && imageInput.files && imageInput.files.length > 0) {
-      // Upload up to 4 images
       var filesToUpload = Array.from(imageInput.files).slice(0, 4);
       for (var i = 0; i < filesToUpload.length; i++) {
         var formData = new FormData();
@@ -146,20 +145,20 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           var uploadRes = await fetch('/api/upload', {
             method: 'POST',
-          headers: { 'Authorization': 'Bearer ' + token },
-          body: formData
-        });
-        if (uploadRes.ok) {
-          var uploadData = await uploadRes.json();
-          productData.images.push({ url: uploadData.url, alt: productData.name });
-          console.log('Image uploaded:', uploadData.url);
-        } else {
-          console.log('Upload failed:', uploadRes.status);
+            headers: { 'Authorization': 'Bearer ' + token },
+            body: formData
+          });
+          if (uploadRes.ok) {
+            var uploadData = await uploadRes.json();
+            productData.images.push({ url: uploadData.url, alt: productData.name });
+            console.log('Image uploaded:', uploadData.url);
+          } else {
+            console.log('Upload failed:', uploadRes.status);
+          }
+        } catch (err) {
+          console.log('Image upload error:', err);
         }
-      } catch (err) {
-        console.log('Image upload error:', err);
       }
-      } // end for loop
     }
 
     // If editing and no new image uploaded, keep existing
