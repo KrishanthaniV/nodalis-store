@@ -11,6 +11,8 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
 const Product = require('../models/Product');
+const { sendOrderStatusEmail, sendOrderConfirmationEmail } = require('../utils/email');
+const User = require('../models/User');
 const { protect, adminOnly } = require('../middleware/auth');
 
 // ---- Create Order (Checkout) ----
@@ -153,5 +155,19 @@ router.put('/:id/status', protect, adminOnly, async (req, res) => {
     res.status(500).json({ message: 'Error updating order status' });
   }
 });
+
+
+// ---- Get Single Order by ID (for tracking) ----
+router.get('/:id', async (req, res) => {
+  try {
+    const Order = require('../models/Order');
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    res.json(order);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching order' });
+  }
+});
+// ---- Get Single Order by ID (for tracking) ----
 
 module.exports = router;

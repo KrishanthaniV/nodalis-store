@@ -11,6 +11,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { sendWelcomeEmail } = require('../utils/email');
 const { protect } = require('../middleware/auth');
 const { JWT_SECRET, JWT_EXPIRES_IN } = require('../config/config');
 
@@ -41,6 +42,9 @@ router.post('/register', async (req, res) => {
       email,
       password: hashedPassword
     });
+
+    // Send welcome email (don't block registration if email fails)
+    sendWelcomeEmail({ firstName: user.firstName, email: user.email }).catch(err => console.log('Welcome email skipped'));
 
     // Generate token
     const token = generateToken(user._id);
@@ -77,6 +81,9 @@ router.post('/login', async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
+
+    // Send welcome email (don't block registration if email fails)
+    sendWelcomeEmail({ firstName: user.firstName, email: user.email }).catch(err => console.log('Welcome email skipped'));
 
     // Generate token
     const token = generateToken(user._id);
