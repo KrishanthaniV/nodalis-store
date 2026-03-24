@@ -77,7 +77,7 @@ router.post('/', protect, async (req, res) => {
 // ---- Get All Orders — Admin ----
 router.get('/', protect, adminOnly, async (req, res) => {
   try {
-    const orders = await Order.find()
+    const orders = await Order.find().populate('customer', 'firstName lastName email')
       .populate('customer', 'firstName lastName email')
       .sort({ createdAt: -1 });
     res.json(orders);
