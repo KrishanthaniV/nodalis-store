@@ -360,6 +360,7 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 <div style="display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start;">
 <div><div style="background:var(--white);padding:2rem;margin-bottom:1.5rem;"><h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1.5rem;">Shipping Address</h3>
 <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" id="shipFirst" required></div><div class="form-group"><label>Last Name</label><input type="text" id="shipLast" required></div></div>
+<div class="form-row"><div class="form-group"><label>Phone Number</label><input type="tel" id="shipPhone" placeholder="07X XXX XXXX" required></div><div class="form-group"><label>Email</label><input type="email" id="shipEmail" required></div></div>
 <div class="form-group"><label>Street Address</label><input type="text" id="shipStreet" required></div>
 <div class="form-row"><div class="form-group"><label>City</label><input type="text" id="shipCity" required></div><div class="form-group"><label>State</label><input type="text" id="shipState" required></div></div>
 <div class="form-row"><div class="form-group"><label>Postal Code</label><input type="text" id="shipZip" required></div><div class="form-group"><label>Country</label><select id="shipCountry"><option value="LK">Sri Lanka</option><option value="US">United States</option><option value="GB">United Kingdom</option><option value="AU">Australia</option></select></div></div></div>
@@ -439,17 +440,27 @@ async function placeOrder() {
   if (!data) { showToast('Error loading cart', 'error'); return; }
 
   // Get shipping address
-  var street = document.getElementById('shippingStreet');
-  var city = document.getElementById('shippingCity');
-  var state = document.getElementById('shippingState');
-  var zip = document.getElementById('shippingZip');
+  var street = document.getElementById('shipStreet');
+  var city = document.getElementById('shipCity');
+  var state = document.getElementById('shipState');
+  var zip = document.getElementById('shipZip');
+
+  var phone = document.getElementById('shipPhone');
+  var email = document.getElementById('shipEmail');
+  var firstName = document.getElementById('shipFirst');
+  var lastName = document.getElementById('shipLast');
+  var country = document.getElementById('shipCountry');
 
   var shippingAddress = {
+    firstName: firstName ? firstName.value : '',
+    lastName: lastName ? lastName.value : '',
+    phone: phone ? phone.value : '',
+    email: email ? email.value : '',
     street: street ? street.value : '',
     city: city ? city.value : '',
     state: state ? state.value : '',
     zip: zip ? zip.value : '',
-    country: 'Sri Lanka'
+    country: country ? country.options[country.selectedIndex].text : 'Sri Lanka'
   };
 
   // Build order items
@@ -497,7 +508,12 @@ async function placeOrder() {
         '<a href="/client/track-order.html?id=' + (order._id || order.order?._id || '') + '" class="btn-luxury btn-dark">Track Your Order</a>' +
         '<a href="/client/shop.html" class="btn-luxury btn-outline">Continue Shopping</a>' +
         '</div>' +
-        '<p style="margin-top:2rem;font-size:.82rem;color:var(--grey);">Send your payment confirmation screenshot to our <a href="https://wa.me/94767003630" style="color:var(--gold);">WhatsApp</a></p>' +
+        '<div style="margin-top:2rem;background:var(--white);padding:1.5rem;text-align:left;">
+<p style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;">Upload Payment Receipt</p>
+<input type="file" id="receiptFile" accept="image/*,.pdf" style="padding:.5rem;border:1px solid var(--cream-dark);width:100%;font-size:.85rem;">
+<button onclick="uploadReceipt()" class="btn-luxury btn-gold" style="margin-top:.8rem;width:100%;justify-content:center;" id="receiptBtn">Upload Receipt</button>
+<p style="font-size:.75rem;color:var(--grey);margin-top:.5rem;">Or send via <a href="https://wa.me/94767003630" style="color:var(--gold);">WhatsApp</a></p>
+</div>' +
         '</div>';
     } else {
       var err = await res.json();
@@ -508,6 +524,33 @@ async function placeOrder() {
     showToast('Server error: ' + err.message, 'error');
     if (btn) { btn.textContent = 'PLACE ORDER'; btn.disabled = false; }
   }
+}
+
+async function uploadReceipt() {
+  var file = document.getElementById('receiptFile');
+  if (!file || !file.files[0]) { showToast('Please select a receipt', 'error'); return; }
+  var token = localStorage.getItem('nodalis_token');
+  var formData = new FormData();
+  formData.append('image', file.files[0]);
+  var btn = document.getElementById('receiptBtn');
+  btn.textContent = 'Uploading...'; btn.disabled = true;
+  try {
+    var res = await fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token }, body: formData });
+    if (res.ok) {
+      var data = await res.json();
+      // Save receipt URL to the order
+      var orderId = document.querySelector('[style*="monospace"]');
+      if (orderId) {
+        await fetch('/api/orders/' + orderId.textContent.trim() + '/receipt', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({ receiptUrl: data.url })
+        });
+      }
+      showToast('Receipt uploaded! We will verify your payment.', 'success');
+      btn.textContent = 'Receipt Uploaded ✓'; btn.style.background = '#7BA06B';
+    } else { showToast('Upload failed', 'error'); btn.textContent = 'Upload Receipt'; btn.disabled = false; }
+  } catch (err) { showToast('Error: ' + err.message, 'error'); btn.textContent = 'Upload Receipt'; btn.disabled = false; }
 }
 </script>
 </body></html>

@@ -28,11 +28,19 @@ const orderSchema = new mongoose.Schema({
   },
   items: [orderItemSchema],
   shippingAddress: {
+    firstName: String,
+    lastName: String,
+    phone: String,
+    email: String,
     street: String,
     city: String,
     state: String,
     zip: String,
     country: String
+  },
+  receiptUrl: {
+    type: String,
+    default: ''
   },
   subtotal: {
     type: Number,

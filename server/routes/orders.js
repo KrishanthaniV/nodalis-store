@@ -51,17 +51,19 @@ router.post('/', protect, async (req, res) => {
       });
     }
 
-    const shipping = subtotal > 100 ? 0 : 8.50;
-    const total = subtotal + shipping;
+    // Use client-sent totals (LKR) if provided, otherwise calculate
+    const clientSubtotal = req.body.subtotal || subtotal;
+    const clientShipping = req.body.shipping !== undefined ? req.body.shipping : (subtotal > 5000 ? 0 : 350);
+    const clientTotal = req.body.total || (clientSubtotal + clientShipping);
 
     const order = await Order.create({
       customer: req.user._id,
       items: orderItems,
       shippingAddress,
-      subtotal,
-      shipping,
-      total,
-      paymentMethod: paymentMethod || 'pending'
+      subtotal: clientSubtotal,
+      shipping: clientShipping,
+      total: clientTotal,
+      paymentMethod: paymentMethod || 'bank_transfer'
     });
 
     // Populate customer info
@@ -169,5 +171,19 @@ router.get('/:id', async (req, res) => {
   }
 });
 // ---- Get Single Order by ID (for tracking) ----
+
+
+// ---- Upload Payment Receipt ----
+router.put('/:id/receipt', protect, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    order.receiptUrl = req.body.receiptUrl;
+    await order.save();
+    res.json({ message: 'Receipt uploaded', receiptUrl: order.receiptUrl });
+  } catch (err) {
+    res.status(500).json({ message: 'Error saving receipt' });
+  }
+});
 
 module.exports = router;
