@@ -9,7 +9,7 @@ const siteContentSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    enum: ['hero', 'categories', 'about-preview', 'newsletter', 'highlight', 'instagram', 'general']
+    enum: ['hero', 'categories', 'about-preview', 'newsletter', 'highlight', 'instagram', 'payment', 'general']
   },
   data: {
     // HERO
@@ -48,6 +48,13 @@ const siteContentSchema = new mongoose.Schema({
     instagramImages: [{ url: String }],
 
     // GENERAL
+    // PAYMENT
+    bankName: { type: String, default: '' },
+    accountName: { type: String, default: '' },
+    accountNumber: { type: String, default: '' },
+    branchName: { type: String, default: '' },
+    bankNotes: { type: String, default: '' },
+
     siteName: { type: String, default: 'Nodalis' },
     tagline: { type: String, default: 'Timeless Pieces' }
   },

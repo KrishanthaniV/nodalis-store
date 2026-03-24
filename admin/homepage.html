@@ -469,6 +469,37 @@ input,textarea,select{font-family:inherit;font-size:1rem}
       </div>
     </div>
 
+    
+    <!-- PAYMENT SETTINGS -->
+    <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Payment / Bank Details</h3>
+      <p style="font-size:.82rem;color:var(--grey);margin-bottom:1rem;">These details will be shown to customers at checkout. Update anytime.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bank Name</label>
+          <input type="text" id="bankName" placeholder="e.g. Commercial Bank of Ceylon">
+        </div>
+        <div class="form-group">
+          <label>Account Holder Name</label>
+          <input type="text" id="accountName" placeholder="e.g. K. Vadivel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Account Number</label>
+          <input type="text" id="accountNumber" placeholder="e.g. 8012345678">
+        </div>
+        <div class="form-group">
+          <label>Branch</label>
+          <input type="text" id="branchName" placeholder="e.g. Negombo Branch">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Additional Notes (shown to customer)</label>
+        <textarea id="bankNotes" rows="2" placeholder="e.g. Please include your order ID as the payment reference. Send payment screenshot to our WhatsApp."></textarea>
+      </div>
+    </div>
+
     <!-- INSTAGRAM IMAGES -->
     <div class="admin-table-card" style="padding:1.5rem;margin-bottom:1.5rem;">
       <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--cream-dark);">Instagram Section Images (6 images)</h3>
@@ -614,6 +645,14 @@ async function loadContent() {
         }
       });
     }
+  
+    if (data.payment) {
+      document.getElementById('bankName').value = data.payment.bankName || '';
+      document.getElementById('accountName').value = data.payment.accountName || '';
+      document.getElementById('accountNumber').value = data.payment.accountNumber || '';
+      document.getElementById('branchName').value = data.payment.branchName || '';
+      document.getElementById('bankNotes').value = data.payment.bankNotes || '';
+    }
   } catch (err) {
     console.log('No saved content yet');
   }
@@ -710,6 +749,13 @@ async function saveAllSections() {
           { name: 'Hand-Painted Tees', slug: 'hand-painted-tees', imageUrl: uploadedUrls.catTees },
           { name: 'Accessories', slug: 'accessories', imageUrl: uploadedUrls.catAccessories }
         ]
+      }),
+      saveSection('payment', {
+        bankName: document.getElementById('bankName').value,
+        accountName: document.getElementById('accountName').value,
+        accountNumber: document.getElementById('accountNumber').value,
+        branchName: document.getElementById('branchName').value,
+        bankNotes: document.getElementById('bankNotes').value
       }),
       saveSection('instagram', {
         instagramHandle: '@nodalis.lk',

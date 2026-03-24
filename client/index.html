@@ -324,6 +324,32 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 /* PRODUCT CARD HOVER IMAGE */
 .product-card-image img{transition:opacity .3s ease,transform .7s cubic-bezier(.4,0,.2,1)}
 .product-card-image[data-hover-img]:hover img{opacity:.95}
+
+/* HERO TEXT FIX */
+.hero-content{text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-media-placeholder{background:linear-gradient(135deg,#0a0a0a 0%,#1a1816 30%,#2a2826 60%,#1a1816 100%)}
+.hero-overlay{background:linear-gradient(to bottom,rgba(10,10,10,.4) 0%,rgba(10,10,10,.65) 50%,rgba(10,10,10,.8) 100%)!important}
+
+/* MOBILE FIXES */
+@media(max-width:768px){
+  .hero-content h1{font-size:2.2rem}
+  .hero-sub{font-size:.85rem}
+  .hero-cta{padding:.8rem 1.5rem;font-size:.6rem}
+  .nav{padding:0 1rem;height:70px}
+  .nav-logo img{height:40px}
+  .section{padding:2.5rem 1rem}
+  .page-header{padding-top:calc(70px + 2rem);padding-bottom:2rem}
+  .product-card-image{aspect-ratio:1}
+  .product-card-name{font-size:.9rem}
+  .product-card-price{font-size:.8rem}
+  .cart-item{flex-direction:column;align-items:flex-start}
+  .cart-item-image{width:100%;height:200px}
+  .checkout-layout{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-content h1{font-size:1.8rem}
+  .marquee-item{font-size:.6rem;padding:0 1rem}
+}
 </style>
 </head>
 <body>

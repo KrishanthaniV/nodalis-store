@@ -315,6 +315,32 @@ input,textarea,select{font-family:inherit;font-size:1rem}
 /* PRODUCT CARD HOVER IMAGE */
 .product-card-image img{transition:opacity .3s ease,transform .7s cubic-bezier(.4,0,.2,1)}
 .product-card-image[data-hover-img]:hover img{opacity:.95}
+
+/* HERO TEXT FIX */
+.hero-content{text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-media-placeholder{background:linear-gradient(135deg,#0a0a0a 0%,#1a1816 30%,#2a2826 60%,#1a1816 100%)}
+.hero-overlay{background:linear-gradient(to bottom,rgba(10,10,10,.4) 0%,rgba(10,10,10,.65) 50%,rgba(10,10,10,.8) 100%)!important}
+
+/* MOBILE FIXES */
+@media(max-width:768px){
+  .hero-content h1{font-size:2.2rem}
+  .hero-sub{font-size:.85rem}
+  .hero-cta{padding:.8rem 1.5rem;font-size:.6rem}
+  .nav{padding:0 1rem;height:70px}
+  .nav-logo img{height:40px}
+  .section{padding:2.5rem 1rem}
+  .page-header{padding-top:calc(70px + 2rem);padding-bottom:2rem}
+  .product-card-image{aspect-ratio:1}
+  .product-card-name{font-size:.9rem}
+  .product-card-price{font-size:.8rem}
+  .cart-item{flex-direction:column;align-items:flex-start}
+  .cart-item-image{width:100%;height:200px}
+  .checkout-layout{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-content h1{font-size:1.8rem}
+  .marquee-item{font-size:.6rem;padding:0 1rem}
+}
 </style></head><body><nav class="nav" id="mainNav">
   <a href="/" class="nav-logo"><img src="/assets/logo/nodalis-logo.png" alt="Nodalis"></a>
   <div class="nav-links">
@@ -353,9 +379,136 @@ input,textarea,select{font-family:inherit;font-size:1rem}
   <div class="footer-bottom"><span>&copy; 2026 Nodalis. All rights reserved.</span><span>Handmade with ♥ in Sri Lanka</span></div>
 </footer><script src="/js/script.js"></script><script src="/js/cart.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',function(){var cart=getCart();if(cart.length===0){window.location.href='/client/cart.html';return;}
-var el=document.getElementById('checkoutSummary');var subtotal=cart.reduce(function(s,i){return s+i.price*i.quantity;},0);var shipping=subtotal>100?0:8.50;var total=subtotal+shipping;
-el.innerHTML='<h3>Order Summary</h3>'+cart.map(function(item){return '<div class="cart-summary-row"><span>'+item.name+' x'+item.quantity+'</span><span>$'+(item.price*item.quantity).toFixed(2)+'</span></div>';}).join('')+'<div class="cart-summary-row" style="margin-top:1rem;"><span>Subtotal</span><span>$'+subtotal.toFixed(2)+'</span></div><div class="cart-summary-row"><span>Shipping</span><span>'+(shipping===0?'Free':'$'+shipping.toFixed(2))+'</span></div><div class="cart-summary-row total"><span>Total</span><span>$'+total.toFixed(2)+'</span></div>';});
-async function placeOrder(){var token=localStorage.getItem('nodalis_token');if(!token){showToast('Please log in first','error');setTimeout(function(){window.location.href='/client/login.html';},1500);return;}
-showToast('Order placed! Thank you!','success');clearCart();setTimeout(function(){window.location.href='/';},2000);}
-</script></body></html>
+document.addEventListener('DOMContentLoaded', async function() {
+  var cart = getCart();
+  if (cart.length === 0) { window.location.href = '/client/cart.html'; return; }
+
+  // Load payment settings
+  var paymentInfo = {};
+  try {
+    var pRes = await fetch('/api/content/payment');
+    if (pRes.ok) {
+      var pData = await pRes.json();
+      paymentInfo = pData.data || {};
+    }
+  } catch(e) {}
+
+  // Build summary
+  var el = document.getElementById('checkoutSummary');
+  var subtotal = cart.reduce(function(s, i) { return s + i.price * i.quantity; }, 0);
+  var shipping = subtotal > 5000 ? 0 : 350;
+  var total = subtotal + shipping;
+
+  var summaryHtml = '<h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Order Summary</h3>';
+  summaryHtml += cart.map(function(item) {
+    return '<div class="cart-summary-row"><span>' + item.name + ' x' + item.quantity + '</span><span>LKR ' + (item.price * item.quantity).toLocaleString() + '</span></div>';
+  }).join('');
+  summaryHtml += '<div class="cart-summary-row" style="margin-top:1rem;padding-top:.5rem;border-top:1px solid var(--cream-dark);"><span>Subtotal</span><span>LKR ' + subtotal.toLocaleString() + '</span></div>';
+  summaryHtml += '<div class="cart-summary-row"><span>Shipping</span><span>' + (shipping === 0 ? 'Free' : 'LKR ' + shipping.toLocaleString()) + '</span></div>';
+  summaryHtml += '<div class="cart-summary-row total" style="font-size:1.15rem;font-weight:600;border-top:1px solid var(--cream-dark);padding-top:.8rem;margin-top:.5rem;"><span>Total</span><span>LKR ' + total.toLocaleString() + '</span></div>';
+
+  // Payment info
+  if (paymentInfo.bankName) {
+    summaryHtml += '<div style="margin-top:1.5rem;padding:1.2rem;background:var(--cream-dark);border-left:3px solid var(--gold);">';
+    summaryHtml += '<p style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;font-weight:500;">Payment Details</p>';
+    summaryHtml += '<p style="font-size:.85rem;line-height:1.8;"><strong>' + paymentInfo.bankName + '</strong><br>';
+    summaryHtml += 'Account: <strong>' + (paymentInfo.accountNumber || '') + '</strong><br>';
+    summaryHtml += 'Name: ' + (paymentInfo.accountName || '') + '<br>';
+    if (paymentInfo.branchName) summaryHtml += 'Branch: ' + paymentInfo.branchName + '<br>';
+    summaryHtml += '</p>';
+    if (paymentInfo.bankNotes) {
+      summaryHtml += '<p style="font-size:.8rem;color:var(--grey);margin-top:.5rem;font-style:italic;">' + paymentInfo.bankNotes + '</p>';
+    }
+    summaryHtml += '</div>';
+  }
+
+  el.innerHTML = summaryHtml;
+
+  // Store totals for order
+  window._checkoutData = { subtotal: subtotal, shipping: shipping, total: total, cart: cart };
+});
+
+async function placeOrder() {
+  var token = localStorage.getItem('nodalis_token');
+  if (!token) {
+    showToast('Please log in first', 'error');
+    setTimeout(function() { window.location.href = '/client/login.html'; }, 1500);
+    return;
+  }
+
+  var data = window._checkoutData;
+  if (!data) { showToast('Error loading cart', 'error'); return; }
+
+  // Get shipping address
+  var street = document.getElementById('shippingStreet');
+  var city = document.getElementById('shippingCity');
+  var state = document.getElementById('shippingState');
+  var zip = document.getElementById('shippingZip');
+
+  var shippingAddress = {
+    street: street ? street.value : '',
+    city: city ? city.value : '',
+    state: state ? state.value : '',
+    zip: zip ? zip.value : '',
+    country: 'Sri Lanka'
+  };
+
+  // Build order items
+  var items = data.cart.map(function(item) {
+    return {
+      product: item.id || item._id || item.productId,
+      name: item.name,
+      price: item.price,
+      size: item.size || '',
+      quantity: item.quantity
+    };
+  });
+
+  var btn = document.querySelector('[onclick="placeOrder()"]');
+  if (btn) { btn.textContent = 'PLACING ORDER...'; btn.disabled = true; }
+
+  try {
+    var res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({
+        items: items,
+        shippingAddress: shippingAddress,
+        subtotal: data.subtotal,
+        shipping: data.shipping,
+        total: data.total,
+        paymentMethod: 'bank_transfer'
+      })
+    });
+
+    if (res.ok) {
+      var order = await res.json();
+      clearCart();
+      // Show success with order ID and tracking
+      document.querySelector('.section').innerHTML = '<div style="text-align:center;padding:3rem 1rem;max-width:600px;margin:0 auto;">' +
+        '<div style="width:64px;height:64px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:.5rem;">Order Placed!</h2>' +
+        '<p style="color:var(--grey);margin-bottom:1.5rem;">Thank you for your order. Please complete the bank transfer using the details below.</p>' +
+        '<div style="background:var(--white);padding:1.5rem;text-align:left;margin-bottom:1.5rem;">' +
+        '<p style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Your Order ID</p>' +
+        '<p style="font-family:monospace;font-size:1rem;margin-bottom:1rem;">' + (order._id || order.order?._id || 'N/A') + '</p>' +
+        '<p style="font-size:.82rem;color:var(--grey);">Use this ID as your payment reference when transferring.</p>' +
+        '</div>' +
+        '<div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">' +
+        '<a href="/client/track-order.html?id=' + (order._id || order.order?._id || '') + '" class="btn-luxury btn-dark">Track Your Order</a>' +
+        '<a href="/client/shop.html" class="btn-luxury btn-outline">Continue Shopping</a>' +
+        '</div>' +
+        '<p style="margin-top:2rem;font-size:.82rem;color:var(--grey);">Send your payment confirmation screenshot to our <a href="https://wa.me/94767003630" style="color:var(--gold);">WhatsApp</a></p>' +
+        '</div>';
+    } else {
+      var err = await res.json();
+      showToast(err.message || 'Error placing order', 'error');
+      if (btn) { btn.textContent = 'PLACE ORDER'; btn.disabled = false; }
+    }
+  } catch (err) {
+    showToast('Server error: ' + err.message, 'error');
+    if (btn) { btn.textContent = 'PLACE ORDER'; btn.disabled = false; }
+  }
+}
+</script>
+</body></html>
